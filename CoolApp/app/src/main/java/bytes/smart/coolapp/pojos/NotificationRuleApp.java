@@ -6,7 +6,7 @@ import android.os.Parcelable;
 import java.io.Serializable;
 
 /**
- * Created by Alexandru on 01-Jun-15.
+ * Created by alexbuicescu on 07.11.2015.
  */
 public class NotificationRuleApp implements Parcelable, Serializable {
 

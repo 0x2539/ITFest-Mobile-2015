@@ -7,7 +7,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
- * Created by Alexandru on 01-Jun-15.
+ * Created by alexbuicescu on 07.11.2015.
  */
 public class NotificationRule implements Parcelable, Serializable {
 
@@ -18,72 +18,52 @@ public class NotificationRule implements Parcelable, Serializable {
     private String wakeUpTheScreenAsString;
     private int flashLightTime;
     private String flashLightAsString;
-    private int lookIntoTitle;
-    private int lookIntoMessage;
     private ArrayList<Vibration> vibratePattern;
     private int defaultColor;
     private ArrayList<NotificationRuleApp> notificationRuleAppsList;
-    private int isEnabled;
-    private long databaseId;
 
     public NotificationRule() {
         vibratePattern = new ArrayList<>();
         notificationRuleAppsList = new ArrayList<>();
         this.id = -1;
-        this.databaseId = -1;
     }
 
     public NotificationRule(String notificationMessage, String defaultSender, int wakeUpTheScreen,
-                            int flashLightTime, int lookIntoTitle, int lookIntoMessage,
-                            int defaultColor, ArrayList<Vibration> vibratePattern,
-                            ArrayList<NotificationRuleApp> notificationRuleAppsList,
-                            int isEnabled) {
+                            int flashLightTime, int defaultColor, ArrayList<Vibration> vibratePattern,
+                            ArrayList<NotificationRuleApp> notificationRuleAppsList) {
         this.notificationMessage = notificationMessage;
         this.defaultSender = defaultSender;
         this.wakeUpTheScreen = wakeUpTheScreen;
         this.flashLightTime = flashLightTime;
-        this.lookIntoTitle = lookIntoTitle;
-        this.lookIntoMessage = lookIntoMessage;
         this.defaultColor = defaultColor;
         this.vibratePattern = vibratePattern;
         this.notificationRuleAppsList = notificationRuleAppsList;
         this.id = -1;
-        this.databaseId = -1;
         this.wakeUpTheScreenAsString = "";
         this.flashLightAsString = "";
-        setIsEnabled(isEnabled);
     }
 
     public NotificationRule(String notificationMessage, String defaultSender, String wakeUpTheScreenAsString,
-                            String flashLightAsString, int lookIntoTitle, int lookIntoMessage,
-                            int defaultColor, ArrayList<Vibration> vibratePattern,
-                            ArrayList<NotificationRuleApp> notificationRuleAppsList,
-                            int isEnabled) {
+                            String flashLightAsString, int defaultColor, ArrayList<Vibration> vibratePattern,
+                            ArrayList<NotificationRuleApp> notificationRuleAppsList) {
         this.notificationMessage = notificationMessage;
         this.defaultSender = defaultSender;
         this.wakeUpTheScreenAsString = wakeUpTheScreenAsString;
         this.flashLightAsString = flashLightAsString;
-        this.lookIntoTitle = lookIntoTitle;
-        this.lookIntoMessage = lookIntoMessage;
         this.defaultColor = defaultColor;
         this.vibratePattern = vibratePattern;
         this.notificationRuleAppsList = notificationRuleAppsList;
         this.id = -1;
-        this.databaseId = -1;
         this.wakeUpTheScreen = 0;
-        setIsEnabled(isEnabled);
     }
 
     public NotificationRule(String notificationMessage, String defaultSender, int wakeUpTheScreen,
-                            int flashLightTime, int lookIntoTitle, int lookIntoMessage,
-                            int defaultColor, ArrayList<Vibration> vibratePattern,
-                            ArrayList<NotificationRuleApp> notificationRuleAppsList,
-                            int isEnabled, long id, long databaseId) {
-        this(notificationMessage, defaultSender, wakeUpTheScreen, flashLightTime, lookIntoTitle,
-                lookIntoMessage, defaultColor, vibratePattern, notificationRuleAppsList, isEnabled);
+                            int flashLightTime, int defaultColor, ArrayList<Vibration> vibratePattern,
+                            ArrayList<NotificationRuleApp> notificationRuleAppsList, long id) {
+        this(notificationMessage, defaultSender, wakeUpTheScreen, flashLightTime,
+                defaultColor, vibratePattern, notificationRuleAppsList);
 
         this.id = id;
-        this.databaseId = databaseId;
     }
 
     public long getId() {
@@ -152,30 +132,6 @@ public class NotificationRule implements Parcelable, Serializable {
         this.notificationRuleAppsList = notificationRuleAppsList;
     }
 
-    public int getIsEnabled() {
-        return isEnabled;
-    }
-
-    public void setIsEnabled(int isEnabled) {
-        this.isEnabled = isEnabled;
-    }
-
-    public int getLookIntoTitle() {
-        return lookIntoTitle;
-    }
-
-    public void setLookIntoTitle(int lookIntoTitle) {
-        this.lookIntoTitle = lookIntoTitle;
-    }
-
-    public int getLookIntoMessage() {
-        return lookIntoMessage;
-    }
-
-    public void setLookIntoMessage(int lookIntoMessage) {
-        this.lookIntoMessage = lookIntoMessage;
-    }
-
     public static final Creator<NotificationRule> CREATOR = new Creator<NotificationRule>() {
         public NotificationRule createFromParcel(Parcel in) {
             return new NotificationRule(in);
@@ -197,8 +153,6 @@ public class NotificationRule implements Parcelable, Serializable {
         this.flashLightAsString = in.readString();
         this.wakeUpTheScreen = in.readInt();
         this.flashLightTime = in.readInt();
-        this.lookIntoTitle = in.readInt();
-        this.lookIntoMessage = in.readInt();
         try {
             in.readTypedList(this.vibratePattern, Vibration.CREATOR);
         } catch (Exception e) {
@@ -210,7 +164,6 @@ public class NotificationRule implements Parcelable, Serializable {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        this.isEnabled = in.readInt();
     }
 
     @Override
@@ -228,8 +181,6 @@ public class NotificationRule implements Parcelable, Serializable {
         dest.writeString(flashLightAsString);
         dest.writeInt(wakeUpTheScreen);
         dest.writeInt(flashLightTime);
-        dest.writeInt(lookIntoTitle);
-        dest.writeInt(lookIntoMessage);
         if (vibratePattern != null)// && defaultVibratePattern.size() > 0)
         {
             dest.writeTypedList(vibratePattern);
@@ -239,19 +190,10 @@ public class NotificationRule implements Parcelable, Serializable {
         {
             dest.writeTypedList(notificationRuleAppsList);
         }
-        dest.writeInt(isEnabled);
     }
 
     public String getWakeUpTheScreenAsString() {
         return wakeUpTheScreenAsString;
-    }
-
-    public long getDatabaseId() {
-        return databaseId;
-    }
-
-    public void setDatabaseId(long databaseId) {
-        this.databaseId = databaseId;
     }
 
     public int getFlashLightTime() {

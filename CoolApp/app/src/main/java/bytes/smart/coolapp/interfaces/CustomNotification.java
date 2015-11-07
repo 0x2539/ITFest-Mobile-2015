@@ -138,6 +138,7 @@ public class CustomNotification {
         notificationCompat.setSmallIcon(R.mipmap.ic_launcher);
         notificationCompat.setLargeIcon(BitmapFactory.decodeResource(getContext().getResources(), R.mipmap.ic_launcher));
         notificationCompat.setColor(context.getResources().getColor(R.color.green_light));
+        contentViewNotification.setTextColor(R.id.layout_notification_message_textview, getContext().getResources().getColor(R.color.black));
 
         for(BasicNotification basicNotification : basicNotifications)
         {

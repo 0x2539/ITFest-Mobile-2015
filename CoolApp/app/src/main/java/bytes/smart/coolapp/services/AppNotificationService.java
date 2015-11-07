@@ -108,6 +108,7 @@ public class AppNotificationService extends NotificationListenerService {
     public void onDestroy() {
         super.onDestroy();
         Log.i(TAG, "onDestroy()");
+        customNotification.dismissNotification();
     }
 }
 

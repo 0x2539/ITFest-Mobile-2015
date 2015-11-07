@@ -33,7 +33,7 @@ public class BasicNotification
                              String notificationSubText, String notificationInfoText,
                              String notificationSummaryText, CharSequence[] notificationTextLines,
                              String notificationTemplate, String[] notificationPeople,
-                             int notificationId)
+                             PendingIntent contentIntent, int notificationId)
     {
         this.packageName = packageName.toLowerCase();
         this.notificationTitle = notificationTitle;
@@ -46,6 +46,7 @@ public class BasicNotification
         this.notificationTextLines = notificationTextLines;
         this.notificationTemplate = notificationTemplate;
         this.notificationPeople = notificationPeople;
+        this.contentIntent = contentIntent;
         this.notificationId = notificationId;
     }
 
@@ -62,7 +63,7 @@ public class BasicNotification
                 NotificationUtils.getNotificationInfoArray(extras, NotificationCompat.EXTRA_TEXT_LINES),
                 NotificationUtils.getNotificationInfo(extras, NotificationCompat.EXTRA_TEMPLATE),
                 NotificationUtils.getNotificationStringArray(extras, NotificationCompat.EXTRA_PEOPLE),
-                sbn.getId());
+                sbn.getNotification().contentIntent, sbn.getId());
     }
 
     public int getNotificationId() {
