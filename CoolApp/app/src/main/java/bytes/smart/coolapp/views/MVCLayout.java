@@ -5,16 +5,17 @@ import android.util.AttributeSet;
 import android.widget.RelativeLayout;
 
 import bytes.smart.coolapp.interfaces.OnChangeListener;
+import bytes.smart.coolapp.pojos.models.MVCModel;
 import bytes.smart.coolapp.pojos.models.MainModel;
 
 /**
  * Created by alexbuicescu on 07.11.2015.
  */
-public class MVCLayout extends RelativeLayout implements OnChangeListener<MainModel> {
+public class MVCLayout extends RelativeLayout implements OnChangeListener<MVCModel> {
 
     private final String TAG = "MainLayout";
 
-    private MainModel model;
+    private MVCModel model;
     private ViewListener viewListener;
 
     public interface ViewListener {
@@ -58,12 +59,13 @@ public class MVCLayout extends RelativeLayout implements OnChangeListener<MainMo
 
     }
 
-    public MainModel getModel() {
+    public MVCModel getModel() {
         return model;
     }
 
-    public void setModel(MainModel model) {
+    public void setModel(MVCModel model) {
         this.model = model;
+        this.model.addListener(this);
     }
 
     public ViewListener getViewListener() {

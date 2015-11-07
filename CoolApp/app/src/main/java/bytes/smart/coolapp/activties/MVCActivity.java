@@ -7,7 +7,9 @@ import android.view.MenuItem;
 import android.view.View;
 
 import bytes.smart.coolapp.R;
+import bytes.smart.coolapp.pojos.models.MVCModel;
 import bytes.smart.coolapp.pojos.models.MainModel;
+import bytes.smart.coolapp.views.MVCLayout;
 import bytes.smart.coolapp.views.MainLayout;
 
 /**
@@ -17,9 +19,9 @@ public class MVCActivity extends AppCompatActivity {
 
     private final String TAG = "MainActivity";
 
-    private MainModel model;
-    private MainLayout layout;
-    private MainLayout.ViewListener viewListener = new MainLayout.ViewListener() {
+    private MVCModel model;
+    private MVCLayout layout;
+    private MVCLayout.ViewListener viewListener = new MVCLayout.ViewListener() {
     };
 
     @Override
@@ -33,11 +35,11 @@ public class MVCActivity extends AppCompatActivity {
     }
 
     private void initModel() {
-        model = new MainModel();
+        model = new MVCModel();
     }
 
     private void initLayout() {
-        layout = (MainLayout) View.inflate(this, R.layout.activity_main, null);
+        layout = (MVCLayout) View.inflate(this, R.layout.activity_main, null);
 
         layout.setViewListener(viewListener);
         layout.setModel(model);

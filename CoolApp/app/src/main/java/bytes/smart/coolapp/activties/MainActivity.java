@@ -1,5 +1,7 @@
 package bytes.smart.coolapp.activties;
 
+import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -11,6 +13,7 @@ import android.view.MenuItem;
 
 import bytes.smart.coolapp.R;
 import bytes.smart.coolapp.pojos.models.MainModel;
+import bytes.smart.coolapp.services.AppNotificationService;
 import bytes.smart.coolapp.views.MainLayout;
 
 /**
@@ -23,6 +26,15 @@ public class MainActivity extends AppCompatActivity {
     private MainModel model;
     private MainLayout layout;
     private MainLayout.ViewListener viewListener = new MainLayout.ViewListener() {
+        @Override
+        public void onGrantPermissionClicked() {
+            startActivity(new Intent("android.settings.ACTION_NOTIFICATION_LISTENER_SETTINGS"));
+        }
+
+        @Override
+        public void onExitClicked() {
+            finish();
+        }
     };
 
     @Override
@@ -44,6 +56,33 @@ public class MainActivity extends AppCompatActivity {
 
         layout.setViewListener(viewListener);
         layout.setModel(model);
+    }
+
+    private void setStatusBarColorToLight() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getWindow().setStatusBarColor(getResources().getColor(R.color.colorPrimary));
+        }
+    }
+
+    private void setStatusBarColorToDark() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getWindow().setStatusBarColor(getResources().getColor(R.color.colorPrimaryDark));
+        }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if(AppNotificationService.isNotificationAccessEnabled)
+        {
+//            layout.hideGrantPermissionDialog();
+            setStatusBarColorToDark();
+        }
+        else{
+            setStatusBarColorToLight();
+        }
+
+        model.setNotificationAccessEnabled(AppNotificationService.isNotificationAccessEnabled, true);
     }
 
     @Override

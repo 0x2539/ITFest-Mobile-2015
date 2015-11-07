@@ -8,5 +8,65 @@
     android:fitsSystemWindows="true"
     tools:context=".MainActivity">
 
+    <RelativeLayout
+        android:id="@+id/activity_main_permission_relative_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorPrimary">
+
+        <TextView
+            android:id="@+id/activity_main_grant_access_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="32dp"
+            android:layout_marginTop="32dp"
+            android:text="Grant access"
+            android:textColor="@color/white"
+            android:textSize="24sp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="32dp"
+            android:layout_marginRight="32dp"
+            android:layout_marginTop="16dp"
+            android:text="Change permissions in your device's app settings. Give ITFEST app permission to read your notifications."
+            android:layout_below="@+id/activity_main_grant_access_textview"
+            android:textColor="@color/white"
+            android:textSize="18sp"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/white"
+            android:layout_above="@+id/activity_main_grant_permission_buttons_linearlayout"/>
+
+        <LinearLayout
+            android:id="@+id/activity_main_grant_permission_buttons_linearlayout"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:layout_alignParentBottom="true">
+
+            <Button
+                android:id="@+id/activity_main_exit_button"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="Exit"
+                android:textColor="@color/white"
+                android:background="@drawable/sel_button_background"/>
+
+            <Button
+                android:id="@+id/activity_main_grant_permission_button"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="Settings >"
+                android:textColor="@color/white"
+                android:background="@drawable/sel_button_background"/>
+
+        </LinearLayout>
+
+    </RelativeLayout>
 
 </bytes.smart.coolapp.views.MainLayout>

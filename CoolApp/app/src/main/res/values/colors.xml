@@ -1,6 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="transparent">#00000000</color>
+    <color name="white">#ffffff</color>
+    <color name="black">#000000</color>
+    <color name="gray_transparent">#88ffffff</color>
+    <color name="gray">#777777</color>
+    <color name="gray_light">#eeeeee</color>
+    <color name="gray_medium">#dddddd</color>
+    <color name="blue">#7998D1</color>
+    <color name="green_light_light">#A7F959</color>
+    <color name="green_light">#87B043</color>
+    <color name="green_dark">#6CA53A</color>
+    <color name="orange">#F39321</color>
+    <color name="orange_dark">#d65d00</color>
+    <color name="red">#F44336</color>
+    <color name="red_dark">#D32F2F</color>
+
+    <color name="snackbar_action_color">@color/orange</color>
+
+    <color name="dark_theme_notification_text_color">#00B1E5</color>
+    <color name="light_theme_notification_text_color">@color/black</color>
+
+    <color name="material_teal_500">#009688</color>
+    <color name="material_teal_900">#004D40</color>
+    <color name="material_light_green_200">#C8E6C9</color>
+    <color name="material_light_green_500">#4CAF50</color>
+    <color name="material_light_green_900">#388E3C</color>
+
+    <color name="colorPrimary">@color/material_teal_500</color>
+    <color name="colorPrimaryDark">@color/material_teal_900</color>
+    <color name="colorPrimaryLight">@color/material_light_green_500</color>
+    <color name="colorAccentDark">@color/material_light_green_900</color>
+    <color name="colorAccent">@color/material_light_green_500</color>
+
+    <color name="custom_color_1">#C41915</color>
+    <color name="custom_color_2">#CA4318</color>
+    <color name="custom_color_3">#EC6C20</color>
+    <color name="custom_color_4">#FD8A26</color>
+    <color name="custom_color_5">#9ACA28</color>
+    <color name="custom_color_6">#C8B654</color>
+    <color name="custom_color_7">#C79C38</color>
+    <color name="custom_color_8">#CA7620</color>
+    <color name="custom_color_9">#87B043</color>
+    <color name="custom_color_10">#53A527</color>
+    <color name="custom_color_11">#67971B</color>
+    <color name="custom_color_12">#13874B</color>
+    <color name="custom_color_13">#20AA66</color>
+    <color name="custom_color_14">#66B393</color>
+    <color name="custom_color_15">#1897A6</color>
+    <color name="custom_color_16">#70B3B8</color>
+    <color name="custom_color_17">#3CB6E3</color>
+    <color name="custom_color_18">#199ACA</color>
+    <color name="custom_color_19">#1993E7</color>
+    <color name="custom_color_20">#1789CE</color>
+    <color name="custom_color_21">#8266C9</color>
+    <color name="custom_color_22">#754CB2</color>
+    <color name="custom_color_23">#6568C9</color>
+    <color name="custom_color_24">#1A57B6</color>
+    <color name="custom_color_25">#A969CA</color>
+    <color name="custom_color_26">#983BCA</color>
+    <color name="custom_color_27">#9D44B6</color>
+    <color name="custom_color_28">#FC464B</color>
+    <color name="custom_color_29">#A29497</color>
+    <color name="custom_color_30">#A37C82</color>
+    <color name="custom_color_31">#C35E7E</color>
+    <color name="custom_color_32">#E62565</color>
+    <color name="custom_color_33">#424242</color>
+    <color name="custom_color_34">#333333</color>
 </resources>
