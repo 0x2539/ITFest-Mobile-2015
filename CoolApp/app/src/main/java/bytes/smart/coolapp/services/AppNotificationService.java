@@ -1,6 +1,7 @@
 package bytes.smart.coolapp.services;
 
 import android.app.NotificationManager;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.IBinder;
@@ -9,8 +10,12 @@ import android.service.notification.StatusBarNotification;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
+import java.util.ArrayList;
+
+import bytes.smart.coolapp.activties.AddNewNotificationActivity;
 import bytes.smart.coolapp.interfaces.CustomNotification;
 import bytes.smart.coolapp.pojos.BasicNotification;
+import bytes.smart.coolapp.pojos.NotificationRule;
 
 
 /**
@@ -22,7 +27,7 @@ public class AppNotificationService extends NotificationListenerService {
     public static boolean isNotificationAccessEnabled = false;
     public static boolean finishedCheckingForPermissions = false;
     private static NotificationManager notificationManager;
-    private CustomNotification customNotification;
+    private static ArrayList<CustomNotification> customNotifications;
 
     @Override
     public IBinder onBind(Intent mIntent) {
@@ -50,7 +55,7 @@ public class AppNotificationService extends NotificationListenerService {
         finishedCheckingForPermissions = false;
         notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
 
-        customNotification = new CustomNotification(getApplicationContext(), notificationManager);
+        customNotifications = new ArrayList<>();
     }
 
     @Override
@@ -71,7 +76,9 @@ public class AppNotificationService extends NotificationListenerService {
                 Log.i(TAG, "notification text: " + newBasicNotification.getNotificationText());
                 Log.i(TAG, "notification big text: " + newBasicNotification.getBigNotificationText());
 
-                customNotification.newNotificationArrived(newBasicNotification);
+                for(CustomNotification customNotification : customNotifications) {
+                    customNotification.newNotificationArrived(newBasicNotification);
+                }
 
             } else {
                 Log.i(TAG, "notification's extras is null");
@@ -97,7 +104,9 @@ public class AppNotificationService extends NotificationListenerService {
                 Log.i(TAG, "notification text: " + newBasicNotification.getNotificationText());
                 Log.i(TAG, "notification big text: " + newBasicNotification.getBigNotificationText());
 
-                customNotification.newNotificationRemoved(newBasicNotification);
+                for(CustomNotification customNotification : customNotifications) {
+                    customNotification.newNotificationRemoved(newBasicNotification);
+                }
             } else {
                 Log.i(TAG, "removed notification's extras is null");
             }
@@ -108,7 +117,36 @@ public class AppNotificationService extends NotificationListenerService {
     public void onDestroy() {
         super.onDestroy();
         Log.i(TAG, "onDestroy()");
-        customNotification.dismissNotification();
+        for(CustomNotification customNotification : customNotifications) {
+            customNotification.dismissNotification();
+        }
+    }
+
+    public static void notificationListenerUpdated(Context context, NotificationRule notificationRule) {
+        for(CustomNotification customNotification : customNotifications) {
+            if(customNotification.getNotificationRule().getId() == notificationRule.getId())
+            {
+                customNotification.dismissNotification();
+                customNotifications.remove(customNotification);
+                break;
+            }
+        }
+        customNotifications.add(new CustomNotification(context, notificationManager, notificationRule));
+    }
+
+    public static void newNotificationListenerCreated(Context context, NotificationRule notificationRule) {
+        customNotifications.add(new CustomNotification(context, notificationManager, notificationRule));
+    }
+
+    public static void notificationListenerRemoved(NotificationRule notificationRule) {
+        for(CustomNotification customNotification : customNotifications) {
+            if(customNotification.getNotificationRule().getId() == notificationRule.getId())
+            {
+                customNotification.dismissNotification();
+                customNotifications.remove(customNotification);
+                return;
+            }
+        }
     }
 }
 

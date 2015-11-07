@@ -4,14 +4,20 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.design.widget.FloatingActionButton;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.RelativeLayout;
 
 import bytes.smart.coolapp.R;
 import bytes.smart.coolapp.interfaces.OnChangeListener;
 import bytes.smart.coolapp.pojos.models.MainModel;
+import bytes.smart.coolapp.utils.ViewUtils;
+import bytes.smart.coolapp.views.adapters.NotificationsAdapter;
 
 /**
  * Created by alexbuicescu on 07.11.2015.
@@ -23,13 +29,22 @@ public class MainLayout extends RelativeLayout implements OnChangeListener<MainM
     private MainModel model;
     private ViewListener viewListener;
 
+    private RelativeLayout notificationsRelativeLayout;
+    private FloatingActionButton addNewNotificationFAB;
+
+    private RelativeLayout emptyRelativeLayout;
+
     private RelativeLayout permissionRelativeLayout;
     private Button grantPermissionButton;
     private Button exitButton;
 
-    private AlertDialog grantPermissionDialog;
+    private ListView notificationsListView;
+    private NotificationsAdapter notificationsAdapter;
+
+    private Toolbar toolbar;
 
     public interface ViewListener {
+        void onAddNewNotificationsClicked();
         void onGrantPermissionClicked();
         void onExitClicked();
     }
@@ -55,6 +70,19 @@ public class MainLayout extends RelativeLayout implements OnChangeListener<MainM
     }
 
     private void initLayout() {
+
+        notificationsRelativeLayout = (RelativeLayout) findViewById(R.id.activity_main_notifications_relativelayout);
+
+        addNewNotificationFAB = (FloatingActionButton) findViewById(R.id.activity_main_add_new_notification_button);
+        addNewNotificationFAB.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getViewListener().onAddNewNotificationsClicked();
+            }
+        });
+
+        emptyRelativeLayout = (RelativeLayout) findViewById(R.id.activity_main_empty_layout);
+
         permissionRelativeLayout = (RelativeLayout) findViewById(R.id.activity_main_permission_relative_layout);
 
         grantPermissionButton = (Button) findViewById(R.id.activity_main_grant_permission_button);
@@ -72,67 +100,37 @@ public class MainLayout extends RelativeLayout implements OnChangeListener<MainM
                 getViewListener().onExitClicked();
             }
         });
+
+        notificationsListView = (ListView) findViewById(R.id.activity_main_notifications_listview);
     }
 
     private void initToolbar() {
-
+        toolbar = (Toolbar) findViewById(R.id.activity_main_toolbar_layout);
+        ((AppCompatActivity)getContext()).setSupportActionBar(toolbar);
+        ViewUtils.setActionBarTitle(getContext(), getResources().getString(R.string.app_name), false);
     }
 
     private void updateView() {
         if(!getModel().isNotificationAccessEnabled())
         {
             permissionRelativeLayout.setVisibility(VISIBLE);
+            notificationsRelativeLayout.setVisibility(GONE);
         }
         else
         {
             permissionRelativeLayout.setVisibility(GONE);
+            notificationsRelativeLayout.setVisibility(VISIBLE);
         }
-    }
 
-    public void showGrantPermissionDialog()
-    {
-        if(grantPermissionDialog != null &&
-                grantPermissionDialog.isShowing())
+        if(notificationsAdapter == null)
         {
-            return;
+            notificationsAdapter = new NotificationsAdapter(getContext(), getModel().getNotificationRules());
+            notificationsListView.setAdapter(notificationsAdapter);
         }
-
-        AlertDialog.Builder notificationPermissionDialogBuilder;
-        notificationPermissionDialogBuilder = new AlertDialog.Builder(getContext());
-
-        notificationPermissionDialogBuilder.setMessage(getResources().getString(R.string.grant_permission_dialog_message));
-        notificationPermissionDialogBuilder.setTitle(getResources().getString(R.string.grant_permission_dialog_title));
-
-        notificationPermissionDialogBuilder.setPositiveButton(getResources().getString(android.R.string.ok), new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-//                getViewListener().onGrantPermissionDialogOkClicked();
-                dialog.dismiss();
-            }
-        });
-
-        notificationPermissionDialogBuilder.setNegativeButton(getResources().getString(android.R.string.cancel), new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-            }
-        });
-
-        grantPermissionDialog = notificationPermissionDialogBuilder.create();
-        grantPermissionDialog.show();
-    }
-
-    public boolean isGrantPermissionDialogVisible()
-    {
-        if(grantPermissionDialog != null) {
-            return grantPermissionDialog.isShowing();
-        }
-        return false;
-    }
-
-    public void hideGrantPermissionDialog()
-    {
-        if(grantPermissionDialog != null) {
-            grantPermissionDialog.dismiss();
+        else
+        {
+            notificationsAdapter.setCurrentItems(getModel().getNotificationRules());
+            notificationsAdapter.notifyDataSetChanged();
         }
     }
 

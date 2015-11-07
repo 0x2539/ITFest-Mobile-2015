@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import bytes.smart.coolapp.R;
 import bytes.smart.coolapp.activties.MainActivity;
 import bytes.smart.coolapp.pojos.BasicNotification;
+import bytes.smart.coolapp.pojos.NotificationRule;
 import bytes.smart.coolapp.utils.CameraUtils;
 import bytes.smart.coolapp.utils.ScreenUtils;
 
@@ -32,13 +33,15 @@ public class CustomNotification {
     private RemoteViews contentViewNotification;
     private NotificationManager notificationManager;
     private ArrayList<BasicNotification> basicNotifications;
+    private NotificationRule notificationRule;
 
-    public CustomNotification(Context context, NotificationManager notificationManager)
+    public CustomNotification(Context context, NotificationManager notificationManager, NotificationRule notificationRule)
     {
         this.context = context;
         this.notificationManager = notificationManager;
 
         basicNotifications = new ArrayList<>();
+        this.notificationRule = notificationRule;
 
         notificationId = notificationIndexer++;
         createNotification();
@@ -177,4 +180,7 @@ public class CustomNotification {
         }
     }
 
+    public NotificationRule getNotificationRule() {
+        return notificationRule;
+    }
 }

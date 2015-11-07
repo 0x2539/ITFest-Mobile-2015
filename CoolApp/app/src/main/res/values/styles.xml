@@ -22,4 +22,22 @@
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
 
+    <style name="FloatingWaveColorActionButtonLight" parent="Material.Drawable.Ripple.Wave.Light">
+        <item name="rd_rippleColor">@color/colorAccentDark</item>
+        <item name="fab_backgroundColor">@color/colorAccent</item>
+        <item name="fab_elevation">3dp</item>
+        <!--<item name="fab_iconLineMorphing">@style/FloatingActionButtonIcon</item>-->
+        <item name="rd_delayClick">none</item>
+        <item name="rd_rippleAnimDuration">200</item>
+
+    </style>
+    <style name="ActionBarThemeOverlay" parent="">
+        <item name="colorControlNormal">@color/white</item>
+        <item name="colorControlHighlight">@color/colorAccent</item>
+        <item name="colorControlActivated">@color/colorAccent</item>
+        <item name="android:textColorPrimary">@color/white</item>
+        <item name="popupTheme">@style/ThemeOverlay.AppCompat.Light</item>
+        <item name="android:theme">@style/ThemeOverlay.AppCompat.Dark.ActionBar</item>
+    </style>
+
 </resources>

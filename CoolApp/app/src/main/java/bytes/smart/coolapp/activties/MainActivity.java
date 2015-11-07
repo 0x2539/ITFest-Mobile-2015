@@ -27,6 +27,12 @@ public class MainActivity extends AppCompatActivity {
     private MainLayout layout;
     private MainLayout.ViewListener viewListener = new MainLayout.ViewListener() {
         @Override
+        public void onAddNewNotificationsClicked() {
+            Intent intent = new Intent(MainActivity.this, AddNewNotificationActivity.class);
+            startActivity(intent);
+        }
+
+        @Override
         public void onGrantPermissionClicked() {
             startActivity(new Intent("android.settings.ACTION_NOTIFICATION_LISTENER_SETTINGS"));
         }

@@ -9,6 +9,57 @@
     tools:context=".MainActivity">
 
     <RelativeLayout
+        android:id="@+id/activity_main_notifications_relativelayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <include
+            android:id="@+id/activity_main_toolbar_layout"
+            layout="@layout/toolbar_layout"/>
+
+        <RelativeLayout
+            android:id="@+id/activity_main_empty_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="32dp"
+                android:layout_centerInParent="true"
+                android:gravity="center"
+                android:text="@string/empty_main_screen"
+                android:textColor="@color/gray"
+                android:textSize="18sp"/>
+        </RelativeLayout>
+
+        <ListView
+            android:id="@+id/activity_main_notifications_listview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="visible"/>
+
+        <android.support.design.widget.CoordinatorLayout
+            android:id="@+id/activity_main_snackbar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/activity_main_add_new_notification_button"
+                style="@style/FloatingWaveColorActionButtonLight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:layout_gravity="end|bottom"
+                android:src="@drawable/ic_add_white_24dp"
+                app:fab_iconSize="24dp"/>
+            <!--app:layout_behavior="example.com.androidnotifier.Views.CustomWidgets.FloatingActionButtonBehavior"-->
+
+        </android.support.design.widget.CoordinatorLayout>
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
         android:id="@+id/activity_main_permission_relative_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
