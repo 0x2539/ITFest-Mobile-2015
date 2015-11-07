@@ -9,6 +9,7 @@ import android.service.notification.StatusBarNotification;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
+import bytes.smart.coolapp.interfaces.CustomNotification;
 import bytes.smart.coolapp.pojos.BasicNotification;
 
 
@@ -21,6 +22,7 @@ public class AppNotificationService extends NotificationListenerService {
     public static boolean isNotificationAccessEnabled = false;
     public static boolean finishedCheckingForPermissions = false;
     private static NotificationManager notificationManager;
+    private CustomNotification customNotification;
 
     @Override
     public IBinder onBind(Intent mIntent) {
@@ -47,6 +49,8 @@ public class AppNotificationService extends NotificationListenerService {
         super.onCreate();
         finishedCheckingForPermissions = false;
         notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+
+        customNotification = new CustomNotification(getApplicationContext(), notificationManager);
     }
 
     @Override
@@ -66,6 +70,8 @@ public class AppNotificationService extends NotificationListenerService {
                 Log.i(TAG, "notification big title: " + newBasicNotification.getBigNotificationTitle());
                 Log.i(TAG, "notification text: " + newBasicNotification.getNotificationText());
                 Log.i(TAG, "notification big text: " + newBasicNotification.getBigNotificationText());
+
+                customNotification.newNotificationArrived(newBasicNotification);
 
             } else {
                 Log.i(TAG, "notification's extras is null");
@@ -91,6 +97,7 @@ public class AppNotificationService extends NotificationListenerService {
                 Log.i(TAG, "notification text: " + newBasicNotification.getNotificationText());
                 Log.i(TAG, "notification big text: " + newBasicNotification.getBigNotificationText());
 
+                customNotification.newNotificationRemoved(newBasicNotification);
             } else {
                 Log.i(TAG, "removed notification's extras is null");
             }

@@ -1,10 +1,12 @@
 package bytes.smart.coolapp.pojos;
 
+import android.app.PendingIntent;
 import android.os.Bundle;
 import android.service.notification.StatusBarNotification;
 import android.support.v4.app.NotificationCompat;
 
 import bytes.smart.coolapp.utils.NotificationUtils;
+import bytes.smart.coolapp.utils.StringUtils;
 
 /**
  * Created by alexbuicescu on 07.11.2015.
@@ -23,6 +25,7 @@ public class BasicNotification
     private CharSequence[] notificationTextLines;
     private String notificationTemplate;
     private String[] notificationPeople;
+    private PendingIntent contentIntent;
 
     public BasicNotification(String packageName,
                              String notificationTitle, String bigNotificationTitle,
@@ -79,7 +82,7 @@ public class BasicNotification
     }
 
     public String getNotificationTitle() {
-        return notificationTitle;
+        return notificationTitle.toLowerCase();
     }
 
     public void setNotificationTitle(String notificationTitle) {
@@ -87,7 +90,7 @@ public class BasicNotification
     }
 
     public String getBigNotificationTitle() {
-        return bigNotificationTitle;
+        return bigNotificationTitle.toLowerCase();
     }
 
     public void setBigNotificationTitle(String bigNotificationTitle) {
@@ -95,7 +98,7 @@ public class BasicNotification
     }
 
     public String getNotificationText() {
-        return notificationText;
+        return notificationText.toLowerCase();
     }
 
     public void setNotificationText(String notificationText) {
@@ -103,7 +106,7 @@ public class BasicNotification
     }
 
     public String getBigNotificationText() {
-        return bigNotificationText;
+        return bigNotificationText.toLowerCase();
     }
 
     public void setBigNotificationText(String bigNotificationText) {
@@ -111,7 +114,7 @@ public class BasicNotification
     }
 
     public String getNotificationSubText() {
-        return notificationSubText;
+        return notificationSubText.toLowerCase();
     }
 
     public void setNotificationSubText(String notificationSubText) {
@@ -119,7 +122,7 @@ public class BasicNotification
     }
 
     public String getNotificationInfoText() {
-        return notificationInfoText;
+        return notificationInfoText.toLowerCase();
     }
 
     public void setNotificationInfoText(String notificationInfoText) {
@@ -127,7 +130,7 @@ public class BasicNotification
     }
 
     public String getNotificationSummaryText() {
-        return notificationSummaryText;
+        return notificationSummaryText.toLowerCase();
     }
 
     public void setNotificationSummaryText(String notificationSummaryText) {
@@ -165,8 +168,8 @@ public class BasicNotification
 
             BasicNotification ptr = (BasicNotification) v;
 
-            if(ptr.getPackageName().equals(this.getPackageName()) &&
-                    ptr.getNotificationId() == this.getNotificationId())
+            if(ptr.getPackageName().equals(this.getPackageName()))// &&
+//                    ptr.getNotificationId() == this.getNotificationId())
             {
                 return true;
             }
@@ -176,4 +179,47 @@ public class BasicNotification
         return false;
     }
 
+    public PendingIntent getContentIntent() {
+        return contentIntent;
+    }
+
+    public void setContentIntent(PendingIntent contentIntent) {
+        this.contentIntent = contentIntent;
+    }
+
+    public boolean containsContact(String theContact)
+    {
+        String contact = StringUtils.trimStartEnd(theContact.toLowerCase());
+
+        if(getNotificationTitle().contains(contact) ||
+                getBigNotificationTitle().contains(contact) ||
+                getNotificationText().contains(contact) ||
+                getBigNotificationText().contains(contact) ||
+                getNotificationSubText().contains(contact) ||
+                getNotificationSummaryText().contains(contact) ||
+                getNotificationInfoText().contains(contact) ||
+                getNotificationTemplate().contains(contact))
+        {
+            return true;
+        }
+        if(getNotificationTextLines() != null) {
+            for(CharSequence textLine : getNotificationTextLines())
+            {
+                if(textLine.toString().toLowerCase().contains(contact))
+                {
+                    return true;
+                }
+            }
+        }
+        if(getNotificationPeople() != null) {
+            for(String people : getNotificationPeople())
+            {
+                if(people.toLowerCase().contains(contact))
+                {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 }
