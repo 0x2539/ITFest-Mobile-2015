@@ -1,7 +1,7 @@
 package bytes.smart.coolapp.utils;
 
 /**
- * Created by Alexandru on 09-Jul-15.
+ * Created by alexbuicescu on 07.11.2015.
  */
 public class StringUtils {
 

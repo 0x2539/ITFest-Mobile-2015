@@ -2,10 +2,12 @@ package bytes.smart.coolapp.views;
 
 import android.content.Context;
 import android.graphics.PorterDuff;
+import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.AttributeSet;
+import android.view.View;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -16,6 +18,7 @@ import android.widget.TextView;
 import bytes.smart.coolapp.R;
 import bytes.smart.coolapp.interfaces.OnChangeListener;
 import bytes.smart.coolapp.pojos.models.AddNewNotificationModel;
+import bytes.smart.coolapp.pojos.models.VibrateModel;
 import bytes.smart.coolapp.utils.StringUtils;
 import bytes.smart.coolapp.utils.ViewUtils;
 
@@ -48,6 +51,8 @@ public class AddNewNotificationLayout extends RelativeLayout implements OnChange
         void onDoneClicked();
         void onDeleteClicked();
         void saveDataToModel();
+        void onVibratePatternClicked();
+        void onGoBackToEditVibrateClicked(VibrateModel vibrateModel);
     }
 
     public AddNewNotificationLayout(Context context) {
@@ -84,6 +89,12 @@ public class AddNewNotificationLayout extends RelativeLayout implements OnChange
         flashLightEditText = (EditText) findViewById(R.id.activity_add_new_notification_flashlight_edittext);
 
         vibratePatternLinearLayout = (LinearLayout) findViewById(R.id.activity_add_new_notification_vibrate_layout);
+        vibratePatternLinearLayout.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getViewListener().onVibratePatternClicked();
+            }
+        });
         vibratePatternSetTextView = (TextView) findViewById(R.id.activity_add_new_notification_vibrate_sub_textview);
 
         defaultColorLinearLayout = (LinearLayout) findViewById(R.id.activity_add_new_notification_pick_default_color_textview);
@@ -140,6 +151,14 @@ public class AddNewNotificationLayout extends RelativeLayout implements OnChange
         }
 
         return ok;
+    }
+
+    public void showSnackBar(String message, String buttonText, final OnClickListener onClickListener)
+    {
+        Snackbar snack = Snackbar.make(vibratePatternLinearLayout, message, Snackbar.LENGTH_LONG);
+        snack.setAction(buttonText, onClickListener);
+        snack.setActionTextColor(getContext().getResources().getColor(R.color.snackbar_action_color));
+        snack.show();
     }
 
     public String getMessage()

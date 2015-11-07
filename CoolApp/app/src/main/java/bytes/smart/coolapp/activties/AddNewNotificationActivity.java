@@ -3,6 +3,7 @@ package bytes.smart.coolapp.activties;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -16,6 +17,7 @@ import bytes.smart.coolapp.managers.NotificationRulesManager;
 import bytes.smart.coolapp.pojos.NotificationRule;
 import bytes.smart.coolapp.pojos.models.AddNewNotificationModel;
 import bytes.smart.coolapp.pojos.models.MVCModel;
+import bytes.smart.coolapp.pojos.models.VibrateModel;
 import bytes.smart.coolapp.services.AppNotificationService;
 import bytes.smart.coolapp.utils.Constants;
 import bytes.smart.coolapp.utils.Utils;
@@ -102,6 +104,31 @@ public class AddNewNotificationActivity extends AppCompatActivity {
             model.setWakeUp(layout.getWakeUp());
             model.setFlashlight(layout.getFlashlight());
         }
+
+        @Override
+        public void onVibratePatternClicked() {
+
+            saveDataToModel();
+
+//            GeneralManager.getGeneralManager().getVibrateManager().setVibrations(rootModel.getVibratePattern());
+            Intent intent = new Intent(AddNewNotificationActivity.this, VibrateActivity.class);
+            VibrateModel vibrateModel = new VibrateModel();
+            vibrateModel.setVibrations(model.getVibratePattern());
+            intent.putExtra(Constants.ADD_OR_EDIT_NOTIFICATION_VIBRATE_LIST, vibrateModel);
+            startActivity(intent);
+        }
+
+        @Override
+        public void onGoBackToEditVibrateClicked(VibrateModel vibrateModel) {
+
+            saveDataToModel();
+
+//            GeneralManager.getGeneralManager().getVibrateManager().setVibrations(rootModel.getVibratePattern());
+            Intent intent = new Intent(AddNewNotificationActivity.this, VibrateActivity.class);
+            intent.putExtra(Constants.ADD_OR_EDIT_NOTIFICATION_VIBRATE_LIST, vibrateModel);
+            startActivity(intent);
+        }
+
     };
 
     @Override
@@ -143,6 +170,56 @@ public class AddNewNotificationActivity extends AppCompatActivity {
 
         model.setIsInEditMode(false);
         model.setColor(getResources().getColor(R.color.custom_color_1));
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+
+        if (null != intent) {
+            Bundle extras = intent.getExtras();
+            if(extras != null)
+            {
+                AddNewNotificationModel newModel = (AddNewNotificationModel) extras.getSerializable(Constants.ADD_OR_EDIT_NOTIFICATION);
+                NotificationRule notificationRule = (NotificationRule) extras.getSerializable(Constants.ADD_OR_EDIT_NOTIFICATION_RULES_LIST);
+                VibrateModel vibrateModel = (VibrateModel) extras.getSerializable(Constants.ADD_OR_EDIT_NOTIFICATION_VIBRATE_LIST);
+                final VibrateModel vibrateModelEdited = (VibrateModel) extras.getSerializable(Constants.ADD_OR_EDIT_NOTIFICATION_VIBRATE_LIST_EDITED);
+
+                if(newModel != null)
+                {
+                    Log.i(TAG, "extra: new model");
+                    model = newModel;
+                }
+                if(notificationRule != null)
+                {
+                    Log.i(TAG, "extra: notification rule " + notificationRule.getNotificationRuleAppsList().size());
+                    model.setRulesList(NotificationRulesManager.getNotificationRulesManager().getNotificationRuleApps());
+//                    rootModel.setRulesList(notificationRule.getNotificationRuleAppsList());
+                }
+                if(vibrateModel != null)
+                {
+                    Log.i(TAG, "extra: vibrate model");
+                    model.setVibratePattern(vibrateModel.getVibrations(), true);
+                }
+                else
+                if(vibrateModelEdited != null)
+                {
+                    Log.i(TAG, "extra: vibrate edited");
+                    //do it on post, because the showing animation will be smoother
+                    layout.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            layout.showSnackBar("Changes were not saved", "GO BACK", new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    viewListener.onGoBackToEditVibrateClicked(vibrateModelEdited);
+                                }
+                            });
+                        }
+                    }, 300);
+                }
+            }
+        }
     }
 
     @Override

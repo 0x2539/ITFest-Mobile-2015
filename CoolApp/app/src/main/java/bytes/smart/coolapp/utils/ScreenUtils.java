@@ -4,7 +4,7 @@ import android.content.Context;
 import android.os.PowerManager;
 
 /**
- * Created by Alexandru on 02-Jun-15.
+ * Created by alexbuicescu on 07.11.2015.
  */
 public class ScreenUtils {
 

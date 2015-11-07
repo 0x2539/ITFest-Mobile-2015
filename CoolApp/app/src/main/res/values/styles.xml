@@ -39,5 +39,13 @@
         <item name="popupTheme">@style/ThemeOverlay.AppCompat.Light</item>
         <item name="android:theme">@style/ThemeOverlay.AppCompat.Dark.ActionBar</item>
     </style>
+    <style name="FloatingWaveColorActionButtonLight2" parent="Material.Drawable.Ripple.Wave.Light">
+        <item name="rd_rippleColor">@color/gray_medium</item>
+        <item name="fab_backgroundColor">@color/gray_light</item>
+        <item name="fab_elevation">3dp</item>
+        <!--<item name="fab_iconLineMorphing">@style/FloatingActionButtonIcon</item>-->
+        <item name="rd_delayClick">none</item>
+        <item name="rd_rippleAnimDuration">0</item>
+    </style>
 
 </resources>

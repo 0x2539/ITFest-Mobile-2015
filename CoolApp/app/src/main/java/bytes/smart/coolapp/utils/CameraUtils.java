@@ -9,7 +9,7 @@ import android.util.Log;
 import java.io.IOException;
 
 /**
- * Created by alexbuicescu on 14.08.2015.
+ * Created by alexbuicescu on 07.11.2015.
  */
 public class CameraUtils {
     private static final String TAG = "CameraUtils";

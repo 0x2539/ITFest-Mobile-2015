@@ -1,0 +1,68 @@
+<bytes.smart.coolapp.views.VibrateLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include
+        android:id="@+id/activity_vibrate_toolbar_layout"
+        layout="@layout/toolbar_layout"/>
+
+    <!--<Button-->
+        <!--android:id="@+id/activity_vibrate_play_stop_button"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_below="@+id/activity_vibrate_toolbar_layout"-->
+        <!--android:text="Play"/>-->
+
+    <ScrollView
+        android:id="@+id/activity_vibrate_vibrations_scrollview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/activity_vibrate_toolbar_layout">
+
+        <LinearLayout
+            android:id="@+id/activity_vibrate_vibrations_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="16dp"
+            android:orientation="vertical">
+        </LinearLayout>
+    </ScrollView>
+    <LinearLayout
+        android:id="@+id/activity_vibrate_empty_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="24dp"
+            android:textColor="@color/gray"/>
+    </LinearLayout>
+
+    <android.support.design.widget.CoordinatorLayout
+        android:id="@+id/activity_vibrate_snackbar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/activity_vibrate_add_vibration_button"
+            style="@style/FloatingWaveColorActionButtonLight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:layout_gravity="end|bottom"
+            android:src="@drawable/ic_add_white_24dp"
+            app:fab_iconSize="24dp"/>
+        <!--app:layout_behavior="example.com.androidnotifier.Views.CustomWidgets.FloatingActionButtonBehavior"-->
+
+    </android.support.design.widget.CoordinatorLayout>
+
+    <!--<ListView-->
+        <!--android:id="@+id/activity_vibrate_vibrations_listview"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:layout_below="@+id/activity_vibrate_toolbar_layout"/>-->
+
+</bytes.smart.coolapp.views.VibrateLayout>

@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import bytes.smart.coolapp.R;
 
 /**
- * Created by Alexandru on 31-May-15.
+ * Created by alexbuicescu on 07.11.2015.
  */
 public class ViewUtils {
 

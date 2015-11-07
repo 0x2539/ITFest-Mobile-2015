@@ -1,0 +1,25 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+
+    <item android:id="@+id/menu_vibrate_play_action"
+        android:title="Play"
+        android:icon="@drawable/ic_play_circle_filled_white_36dp"
+        android:showAsAction="always"
+        app:showAsAction="always"/>
+
+    <!--<item android:id="@+id/menu_vibrate_add_new_action"-->
+        <!--android:title="Add New"-->
+        <!--android:icon="@drawable/ic_add_white_24dp"-->
+        <!--android:showAsAction="always"-->
+        <!--app:showAsAction="always"/>-->
+
+    <item android:id="@+id/menu_vibrate_done_action"
+        android:title="Done"
+        android:icon="@drawable/ic_done_white_24dp"
+        android:showAsAction="always"
+
+        app:showAsAction="always|withText"/>
+
+</menu>

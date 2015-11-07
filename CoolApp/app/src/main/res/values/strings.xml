@@ -4,4 +4,9 @@
     <string name="grant_permission_dialog_message">You need to grant the app access to your notifications.</string>
     <string name="grant_permission_dialog_title">Permission Request</string>
     <string name="empty_main_screen">Great things start with a small step.\nPress the + to get started.</string>
+
+    <string name="gen_edittext_cant_be_empty">Can\'t be empty</string>
+    <string name="gen_vibration_cant_be_negative">Can\'t be negative</string>
+    <string name="gen_vibration_cant_be_higher_than">Can\'t be higher than 3,600,000</string>
+
 </resources>
