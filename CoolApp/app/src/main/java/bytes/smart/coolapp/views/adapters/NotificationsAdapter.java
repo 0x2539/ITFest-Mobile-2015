@@ -1,11 +1,13 @@
 package bytes.smart.coolapp.views.adapters;
 
 import android.content.Context;
+import android.graphics.PorterDuff;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.CompoundButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.List;
@@ -67,6 +69,7 @@ public class NotificationsAdapter extends BaseAdapter {
             holder = new ViewHolder();
             holder.notificationSenderTextView = (TextView) view.findViewById(R.id.row_custom_notification_title_textview);
             holder.notificationMessageTextView = (TextView) view.findViewById(R.id.row_custom_notification_message_textview);
+            holder.notificationColorImageView = (ImageView) view.findViewById(R.id.row_custom_notification_color_imageview);
 
             view.setTag(holder);
         } else {
@@ -75,6 +78,7 @@ public class NotificationsAdapter extends BaseAdapter {
 
         holder.notificationSenderTextView.setText(currentItems.get(i).getDefaultSender());
         holder.notificationMessageTextView.setText(currentItems.get(i).getNotificationMessage());
+        holder.notificationColorImageView.setColorFilter(currentItems.get(i).getDefaultColor(), PorterDuff.Mode.SRC_ATOP);
 
 
         return view;
@@ -87,6 +91,7 @@ public class NotificationsAdapter extends BaseAdapter {
     private static class ViewHolder {
         TextView notificationSenderTextView;
         TextView notificationMessageTextView;
+        ImageView notificationColorImageView;
     }
 }
 

@@ -13,6 +13,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center_vertical"
+        android:layout_alignParentLeft="true"
+        android:layout_toLeftOf="@+id/row_custom_notification_color_imageview"
         android:orientation="vertical">
 
         <TextView
@@ -31,5 +33,16 @@
             android:textColor="@color/gray"
             android:text="messenger"/>
     </LinearLayout>
+
+    <ImageView
+        android:id="@+id/row_custom_notification_color_imageview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:src="@drawable/ic_palette_white_36dp"/>
 
 </RelativeLayout>

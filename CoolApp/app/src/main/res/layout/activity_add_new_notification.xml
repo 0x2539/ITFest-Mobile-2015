@@ -31,12 +31,12 @@
                 android:gravity="center_vertical">
 
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
                     android:layout_marginRight="16dp"
                     android:layout_marginTop="8dp"
                     android:layout_marginBottom="8dp"
-                    android:src="@drawable/ic_play_circle_filled_white_36dp"/>
+                    android:src="@drawable/ic_folder_special_black_36dp"/>
 
                 <android.support.design.widget.TextInputLayout
                     android:id="@+id/activity_add_new_notification_message_textinputlayout"
@@ -65,12 +65,12 @@
 
                 <ImageView
                     android:id="@+id/activity_add_new_notification_contact_default_imageview"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
                     android:layout_marginRight="16dp"
                     android:layout_marginTop="8dp"
                     android:layout_marginBottom="8dp"
-                    android:src="@drawable/ic_play_circle_filled_white_36dp"/>
+                    android:src="@drawable/ic_people_black_36dp"/>
 
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/activity_add_new_notification_contact_imageview"
@@ -107,12 +107,12 @@
                 android:gravity="center_vertical">
 
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
                     android:layout_marginRight="16dp"
                     android:layout_marginTop="8dp"
                     android:layout_marginBottom="8dp"
-                    android:src="@drawable/ic_play_circle_filled_white_36dp"/>
+                    android:src="@drawable/ic_smartphone_black_24dp"/>
 
                 <android.support.design.widget.TextInputLayout
                     android:id="@+id/activity_add_new_notification_wake_screen_textinputlayout"
@@ -143,12 +143,12 @@
                 android:gravity="center_vertical">
 
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
                     android:layout_marginRight="16dp"
                     android:layout_marginTop="8dp"
                     android:layout_marginBottom="8dp"
-                    android:src="@drawable/ic_play_circle_filled_white_36dp"/>
+                    android:src="@drawable/ic_flash_on_black_36dp"/>
 
                 <android.support.design.widget.TextInputLayout
                     android:id="@+id/activity_add_new_notification_flashlight_textinputlayout"
@@ -207,12 +207,12 @@
                 android:descendantFocusability="blocksDescendants">
 
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
                     android:layout_marginRight="16dp"
                     android:layout_marginTop="8dp"
                     android:layout_marginBottom="8dp"
-                    android:src="@drawable/ic_play_circle_filled_white_36dp"/>
+                    android:src="@drawable/ic_vibration_black_24dp"/>
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

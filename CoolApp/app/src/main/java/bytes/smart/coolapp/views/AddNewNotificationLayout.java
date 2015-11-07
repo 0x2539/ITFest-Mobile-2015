@@ -1,5 +1,6 @@
 package bytes.smart.coolapp.views;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.PorterDuff;
 import android.support.design.widget.Snackbar;
@@ -124,6 +125,8 @@ public class AddNewNotificationLayout extends RelativeLayout implements OnChange
         defaultColorImageView = (ImageView) findViewById(R.id.activity_add_new_notification_choose_color_imageview);
         contactPhotoImageView = (ImageView) findViewById(R.id.activity_add_new_notification_contact_imageview);
         contactPhotoDefaultImageView = (ImageView) findViewById(R.id.activity_add_new_notification_contact_default_imageview);
+
+        ViewUtils.hideKeyboard((Activity) getContext(), notificationTextEditText);
     }
 
     private void initToolbar() {

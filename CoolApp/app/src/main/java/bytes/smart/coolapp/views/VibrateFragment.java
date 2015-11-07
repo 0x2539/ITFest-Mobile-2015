@@ -6,8 +6,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import bytes.smart.coolapp.R;
+import bytes.smart.coolapp.managers.BlindManager;
+import bytes.smart.coolapp.pojos.Vibration;
 import bytes.smart.coolapp.pojos.models.ContactsFragmentModel;
 import bytes.smart.coolapp.pojos.models.VibrateFragmentModel;
 
@@ -18,9 +21,39 @@ public class VibrateFragment extends TabbedRootFragment<VibrateFragmentLayout> i
 
     private final String TAG = "ContactsFragment";
 
+    int index = 0;
+
     private VibrateFragmentLayout layout;
     private VibrateFragmentModel model;
     private VibrateFragmentLayout.ViewListener viewListener = new VibrateFragmentLayout.ViewListener() {
+        @Override
+        public void onPlusClicked() {
+            if(model.getVibrationTime() < 10000) {
+                model.setVibrationTime(model.getVibrationTime() + 100);
+            }
+
+            Toast.makeText(getContext(), model.getVibrationTime() + "", Toast.LENGTH_SHORT).show();
+        }
+
+        @Override
+        public void onMinusClicked() {
+            if(model.getVibrationTime() >= 100) {
+                model.setVibrationTime(model.getVibrationTime() - 100);
+            }
+
+            Toast.makeText(getContext(), model.getVibrationTime() + "", Toast.LENGTH_SHORT).show();
+        }
+
+        @Override
+        public void onNextClicked() {
+            model.setVibrationTime(0);
+            BlindManager.getBlindManager().addVibration(new Vibration(index++, model.getVibrationTime(), 100));
+        }
+
+        @Override
+        public void onPreviousClicked() {
+//            BlindManager.getBlindManager().addVibration(new Vibration(index, model.getVibrationTime(), 100));
+        }
     };
 
     private Activity activity;
