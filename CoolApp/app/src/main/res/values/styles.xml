@@ -47,5 +47,13 @@
         <item name="rd_delayClick">none</item>
         <item name="rd_rippleAnimDuration">0</item>
     </style>
+    <style name="AppThemeDialog" parent="@android:style/Theme.Light.NoTitleBar">
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:backgroundDimEnabled">true</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:windowAnimationStyle">@android:style/Animation.Dialog</item>
+    </style>
+
 
 </resources>

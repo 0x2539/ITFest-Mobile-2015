@@ -25,7 +25,7 @@ public class AddNewNotificationModel extends SimpleObservable<AddNewNotification
     private ArrayList<NotificationRuleApp> rulesList;
 
     public void update(boolean... update) {
-        if ((update.length > 0 && update[0]) || update.length == 0) {
+        if ((update.length > 0 && update[0])) {
             notifyObservers();
         }
     }

@@ -23,6 +23,7 @@ import bytes.smart.coolapp.utils.Constants;
 import bytes.smart.coolapp.utils.Utils;
 import bytes.smart.coolapp.views.AddNewNotificationLayout;
 import bytes.smart.coolapp.views.MVCLayout;
+import bytes.smart.coolapp.views.dialogs.ColorPickerDialog;
 
 /**
  * Created by alexbuicescu on 07.11.2015.
@@ -103,6 +104,8 @@ public class AddNewNotificationActivity extends AppCompatActivity {
             model.setContact(layout.getContact());
             model.setWakeUp(layout.getWakeUp());
             model.setFlashlight(layout.getFlashlight());
+
+            Log.e(TAG, "model data: " + layout.getMessage() + " " + layout.getContact() + " " + layout.getWakeUp() + " " + layout.getFlashlight());
         }
 
         @Override
@@ -127,6 +130,21 @@ public class AddNewNotificationActivity extends AppCompatActivity {
             Intent intent = new Intent(AddNewNotificationActivity.this, VibrateActivity.class);
             intent.putExtra(Constants.ADD_OR_EDIT_NOTIFICATION_VIBRATE_LIST, vibrateModel);
             startActivity(intent);
+        }
+
+        @Override
+        public void onPickDefaultColorClicked() {
+
+            saveDataToModel();
+
+            final ColorPickerDialog.Builder colorPickerDialog = new ColorPickerDialog.Builder(AddNewNotificationActivity.this);
+            colorPickerDialog.setOnColorClicked(new Runnable() {
+                @Override
+                public void run() {
+                    model.setColor(colorPickerDialog.getPickedColor(), true);
+                }
+            });
+            colorPickerDialog.build().show();
         }
 
     };
@@ -156,12 +174,15 @@ public class AddNewNotificationActivity extends AppCompatActivity {
     private void getExtras()
     {
         Intent intent = getIntent();
+        Log.e(TAG, "get extras");
 
         if(intent.getExtras() != null)
         {
+            Log.e(TAG, "extras not null");
             NotificationRule notificationRule = (NotificationRule) intent.getExtras().getSerializable(Constants.ADD_OR_EDIT_NOTIFICATION);
 
             if(notificationRule != null) {
+                Log.e(TAG, "notification rule not null");
                 model.populateModel(notificationRule);
                 model.setIsInEditMode(notificationRule.getId() != -1);
                 return;

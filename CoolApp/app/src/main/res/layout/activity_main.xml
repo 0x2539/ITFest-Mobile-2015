@@ -20,6 +20,7 @@
             android:id="@+id/activity_main_empty_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_below="@+id/activity_main_toolbar_layout"
             android:gravity="center">
             <TextView
                 android:layout_width="wrap_content"
@@ -36,6 +37,7 @@
             android:id="@+id/activity_main_notifications_listview"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_below="@+id/activity_main_toolbar_layout"
             android:visibility="visible"/>
 
         <android.support.design.widget.CoordinatorLayout

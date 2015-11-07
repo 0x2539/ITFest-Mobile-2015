@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.AttributeSet;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
@@ -47,6 +48,7 @@ public class MainLayout extends RelativeLayout implements OnChangeListener<MainM
         void onAddNewNotificationsClicked();
         void onGrantPermissionClicked();
         void onExitClicked();
+        void onNotificationClicked(int position);
     }
 
     public MainLayout(Context context) {
@@ -102,6 +104,12 @@ public class MainLayout extends RelativeLayout implements OnChangeListener<MainM
         });
 
         notificationsListView = (ListView) findViewById(R.id.activity_main_notifications_listview);
+        notificationsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                getViewListener().onNotificationClicked(position);
+            }
+        });
     }
 
     private void initToolbar() {
@@ -120,6 +128,15 @@ public class MainLayout extends RelativeLayout implements OnChangeListener<MainM
         {
             permissionRelativeLayout.setVisibility(GONE);
             notificationsRelativeLayout.setVisibility(VISIBLE);
+
+            if(getModel().getNotificationRules().size() > 0)
+            {
+                emptyRelativeLayout.setVisibility(GONE);
+            }
+            else
+            {
+                emptyRelativeLayout.setVisibility(VISIBLE);
+            }
         }
 
         if(notificationsAdapter == null)

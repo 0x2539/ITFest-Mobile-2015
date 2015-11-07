@@ -53,6 +53,7 @@ public class AddNewNotificationLayout extends RelativeLayout implements OnChange
         void saveDataToModel();
         void onVibratePatternClicked();
         void onGoBackToEditVibrateClicked(VibrateModel vibrateModel);
+        void onPickDefaultColorClicked();
     }
 
     public AddNewNotificationLayout(Context context) {
@@ -98,6 +99,12 @@ public class AddNewNotificationLayout extends RelativeLayout implements OnChange
         vibratePatternSetTextView = (TextView) findViewById(R.id.activity_add_new_notification_vibrate_sub_textview);
 
         defaultColorLinearLayout = (LinearLayout) findViewById(R.id.activity_add_new_notification_pick_default_color_textview);
+        defaultColorLinearLayout.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getViewListener().onPickDefaultColorClicked();
+            }
+        });
         defaultColorImageView = (ImageView) findViewById(R.id.activity_add_new_notification_choose_color_imageview);
     }
 
