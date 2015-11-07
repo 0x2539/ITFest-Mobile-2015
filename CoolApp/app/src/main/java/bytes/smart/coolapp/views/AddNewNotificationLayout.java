@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.AttributeSet;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -46,6 +47,8 @@ public class AddNewNotificationLayout extends RelativeLayout implements OnChange
     private TextView vibratePatternSetTextView;
     private LinearLayout defaultColorLinearLayout;
     private ImageView defaultColorImageView;
+    private ImageView contactPhotoImageView;
+    private ImageView contactPhotoDefaultImageView;
 
     private ContactsAdapter contactsAdapter;
 
@@ -87,6 +90,13 @@ public class AddNewNotificationLayout extends RelativeLayout implements OnChange
         contactTextInputLayout = (TextInputLayout) findViewById(R.id.activity_add_new_notification_contact_textinputlayout);
         contactAutoCompleteTextView = (AutoCompleteTextView) findViewById(R.id.activity_add_new_notification_contact_autocompletetextview);
         contactsAdapter = new ContactsAdapter(getContext(), ContactsManager.getContactsManager(getContext()).getContacts());
+        contactAutoCompleteTextView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                getViewListener().saveDataToModel();
+                updateView();
+            }
+        });
         contactAutoCompleteTextView.setAdapter(contactsAdapter);
 
         wakeUpTextInputLayout = (TextInputLayout) findViewById(R.id.activity_add_new_notification_wake_screen_textinputlayout);
@@ -112,6 +122,8 @@ public class AddNewNotificationLayout extends RelativeLayout implements OnChange
             }
         });
         defaultColorImageView = (ImageView) findViewById(R.id.activity_add_new_notification_choose_color_imageview);
+        contactPhotoImageView = (ImageView) findViewById(R.id.activity_add_new_notification_contact_imageview);
+        contactPhotoDefaultImageView = (ImageView) findViewById(R.id.activity_add_new_notification_contact_default_imageview);
     }
 
     private void initToolbar() {
@@ -134,6 +146,18 @@ public class AddNewNotificationLayout extends RelativeLayout implements OnChange
         else
         {
             vibratePatternSetTextView.setText("Not set");
+        }
+
+        if(ContactsManager.getContactsManager(getContext()).getContactPhoto(contactAutoCompleteTextView.getText().toString()) != null)
+        {
+            contactPhotoDefaultImageView.setVisibility(GONE);
+            contactPhotoImageView.setVisibility(VISIBLE);
+            contactPhotoImageView.setImageDrawable(ContactsManager.getContactsManager(getContext()).getContactPhoto(contactAutoCompleteTextView.getText().toString()));
+        }
+        else
+        {
+            contactPhotoDefaultImageView.setVisibility(VISIBLE);
+            contactPhotoImageView.setVisibility(GONE);
         }
 
         defaultColorImageView.setColorFilter(getModel().getColor(), PorterDuff.Mode.SRC_ATOP);

@@ -90,6 +90,17 @@ public class ContactsManager {
         }
     }
 
+    public Drawable getContactPhoto(String contactName){
+        for(Contact contact : contacts)
+        {
+            if(contact.getName().equalsIgnoreCase(contactName))
+            {
+                return contact.getPhoto();
+            }
+        }
+        return null;
+    }
+
     private Drawable retrieveContactPhoto(String contactID) {
 
         Bitmap photo = null;
