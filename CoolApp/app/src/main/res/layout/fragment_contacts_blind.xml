@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<bytes.smart.coolapp.views.ContactsFragmentLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/fragment_contacts_blind_cancel_button"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="Cancel"/>
+
+            <Button
+                android:id="@+id/fragment_contacts_blind_save_button"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="Save"/>
+
+        </LinearLayout>
+
+        <ListView
+            android:id="@+id/fragment_contacts_blind_listview"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
+
+    </LinearLayout>
+</bytes.smart.coolapp.views.ContactsFragmentLayout>
