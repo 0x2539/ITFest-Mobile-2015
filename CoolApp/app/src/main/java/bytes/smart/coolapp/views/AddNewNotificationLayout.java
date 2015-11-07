@@ -17,10 +17,12 @@ import android.widget.TextView;
 
 import bytes.smart.coolapp.R;
 import bytes.smart.coolapp.interfaces.OnChangeListener;
+import bytes.smart.coolapp.managers.ContactsManager;
 import bytes.smart.coolapp.pojos.models.AddNewNotificationModel;
 import bytes.smart.coolapp.pojos.models.VibrateModel;
 import bytes.smart.coolapp.utils.StringUtils;
 import bytes.smart.coolapp.utils.ViewUtils;
+import bytes.smart.coolapp.views.adapters.ContactsAdapter;
 
 /**
  * Created by alexbuicescu on 07.11.2015.
@@ -44,6 +46,8 @@ public class AddNewNotificationLayout extends RelativeLayout implements OnChange
     private TextView vibratePatternSetTextView;
     private LinearLayout defaultColorLinearLayout;
     private ImageView defaultColorImageView;
+
+    private ContactsAdapter contactsAdapter;
 
     private Toolbar toolbar;
 
@@ -82,6 +86,8 @@ public class AddNewNotificationLayout extends RelativeLayout implements OnChange
 
         contactTextInputLayout = (TextInputLayout) findViewById(R.id.activity_add_new_notification_contact_textinputlayout);
         contactAutoCompleteTextView = (AutoCompleteTextView) findViewById(R.id.activity_add_new_notification_contact_autocompletetextview);
+        contactsAdapter = new ContactsAdapter(getContext(), ContactsManager.getContactsManager(getContext()).getContacts());
+        contactAutoCompleteTextView.setAdapter(contactsAdapter);
 
         wakeUpTextInputLayout = (TextInputLayout) findViewById(R.id.activity_add_new_notification_wake_screen_textinputlayout);
         wakeUpEditText = (EditText) findViewById(R.id.activity_add_new_notification_wake_screen_edittext);

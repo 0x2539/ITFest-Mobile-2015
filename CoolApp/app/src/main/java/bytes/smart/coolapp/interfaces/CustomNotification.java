@@ -86,7 +86,7 @@ public class CustomNotification {
 
             contentViewNotification.setTextColor(R.id.layout_notification_message_textview, getContext().getResources().getColor(R.color.black));
 
-            contentViewNotification.setTextViewText(R.id.layout_notification_message_textview, "Hello");
+            contentViewNotification.setTextViewText(R.id.layout_notification_message_textview, getNotificationRule().getNotificationMessage());
 
             notificationCompat.setContent(contentViewNotification);
 
@@ -118,7 +118,7 @@ public class CustomNotification {
         partialContentViewNotification.setInt(
                 R.id.layout_notification_item_imageview,
                 "setBackgroundColor",
-                getContext().getResources().getColor(R.color.custom_color_10));
+                getNotificationRule().getDefaultColor());
 
         try {
             partialContentViewNotification.setOnClickPendingIntent(
@@ -162,7 +162,7 @@ public class CustomNotification {
 
     public void newNotificationArrived(BasicNotification basicNotification)
     {
-        if(basicNotification.containsContact("buicescu"))
+        if(basicNotification.containsContact(getNotificationRule().getDefaultSender().toLowerCase()))
         {
             Log.i(TAG, "found contact");
             basicNotifications.add(basicNotification);

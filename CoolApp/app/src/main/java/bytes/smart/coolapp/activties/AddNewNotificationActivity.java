@@ -20,6 +20,7 @@ import bytes.smart.coolapp.pojos.models.MVCModel;
 import bytes.smart.coolapp.pojos.models.VibrateModel;
 import bytes.smart.coolapp.services.AppNotificationService;
 import bytes.smart.coolapp.utils.Constants;
+import bytes.smart.coolapp.utils.StringUtils;
 import bytes.smart.coolapp.utils.Utils;
 import bytes.smart.coolapp.views.AddNewNotificationLayout;
 import bytes.smart.coolapp.views.MVCLayout;
@@ -100,10 +101,10 @@ public class AddNewNotificationActivity extends AppCompatActivity {
 
         @Override
         public void saveDataToModel() {
-            model.setMessage(layout.getMessage());
-            model.setContact(layout.getContact());
-            model.setWakeUp(layout.getWakeUp());
-            model.setFlashlight(layout.getFlashlight());
+            model.setMessage(StringUtils.trimStartEnd(layout.getMessage()));
+            model.setContact(StringUtils.trimStartEnd(layout.getContact()));
+            model.setWakeUp(StringUtils.trimStartEnd(layout.getWakeUp()));
+            model.setFlashlight(StringUtils.trimStartEnd(layout.getFlashlight()));
 
             Log.e(TAG, "model data: " + layout.getMessage() + " " + layout.getContact() + " " + layout.getWakeUp() + " " + layout.getFlashlight());
         }
